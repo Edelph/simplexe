@@ -1,6 +1,5 @@
 package com.edelph.simplexe.util;
 
-import java.awt.*;
 import java.util.Optional;
 
 public class Fraction implements Calculable<Fraction> {
@@ -64,54 +63,63 @@ public class Fraction implements Calculable<Fraction> {
     }
 
     @Override
-    public Fraction plus(Fraction thing) {
-        if(denominator == thing.denominator){
-            return Fraction.build(numerator+thing.numerator, denominator).simplify();
-        }
-        int num = (numerator * thing.denominator)+(thing.numerator * denominator);
-        return Fraction.build(num, denominator*thing.denominator).simplify();
+    public Fraction plus(Fraction fraction) {
+        if(Math.abs(denominator) == Math.abs(fraction.denominator))
+            return Fraction.build(numerator + fraction.numerator, denominator);
+        int num = (numerator * fraction.denominator) + (fraction.numerator * denominator);
+        return Fraction.build(num, denominator*fraction.denominator);
     }
     public Fraction plus(int number){
         return this.plus(new Fraction(number));
     }
+    public Fraction plus(String fraction){
+        return this.plus(Fraction.build(fraction));
+    }
 
     @Override
-    public Fraction less(Fraction thing) {
-        if(denominator == thing.denominator){
-            return Fraction.build(numerator-thing.numerator, denominator).simplify();
+    public Fraction less(Fraction fraction) {
+        if(Math.abs(denominator) == Math.abs(fraction.denominator)){
+            return Fraction.build(numerator - fraction.numerator, denominator);
         }
-        int num = (numerator * thing.denominator)-(thing.numerator * denominator);
-        return Fraction.build(num, denominator*thing.denominator).simplify();
+        int num = (numerator * fraction.denominator) - (fraction.numerator * denominator);
+        return Fraction.build(num, denominator * fraction.denominator);
     }
     public Fraction less(int number){
         return this.less(new Fraction(number));
     }
+    public Fraction less(String fraction){
+        return this.less(Fraction.build(fraction));
+    }
 
     @Override
-    public Fraction divide(Fraction thing) {
-        return this.multiply(thing.invert());
+    public Fraction divide(Fraction fraction) {
+        return this.multiply(fraction.inverse());
     }
     public Fraction divide(int number) {
         return this.divide(new Fraction(number));
     }
-
+    public Fraction divide(String fraction) {
+        return this.divide(Fraction.build(fraction));
+    }
     @Override
-    public Fraction multiply(Fraction thing) {
-        Fraction fraction = thing.simplify();
-        return Fraction.build(numerator*fraction.numerator, denominator * fraction.denominator).simplify();
+    public Fraction multiply(Fraction fraction) {
+        return Fraction.build(numerator * fraction.numerator, denominator * fraction.denominator);
     }
-    public Fraction multiply(int thing){
-        return Fraction.build(numerator*thing , denominator).simplify();
+    public Fraction multiply(int number){
+        return Fraction.build(numerator * number , denominator);
     }
 
+    public Fraction multiply(String fraction){
+        return multiply(Fraction.build(fraction));
+    }
     @Override
     public Fraction exponent(int number) {
-        Fraction fraction = Fraction.build(this).simplify();
+        Fraction fraction = Fraction.build(this);
         Fraction fractionReturn = fraction;
         for (int i = number; i >1 ; i--) {
             fractionReturn = fractionReturn.multiply(fraction);
         }
-        return fractionReturn.simplify();
+        return fractionReturn;
     }
 
     @Override
@@ -120,21 +128,20 @@ public class Fraction implements Calculable<Fraction> {
     }
 
     @Override
-    public Fraction invert() {
+    public Fraction inverse() {
         return Fraction.build(denominator,numerator);
     }
 
-    @Override
     public Fraction simplify() {
         this.set(simplify(simplifyDirect(),2));
         return this;
     }
     public Optional<Integer> isMultipleOf(int number, int of){
-        if(Math.abs(number) == of) return  Optional.empty();
-        for (int i = 2; i < number; i++){
+        if(Math.abs(number) == of) return  Optional.of(1);
+        for (int i = 2; i < Math.abs(number); i++){
             int result = i*of;
-            if( result == number) return Optional.of(i);
-            if (result> number) return Optional.empty();
+            if(result == Math.abs(number)) return Optional.of(number > 0 ? i : -i);
+            if(result > Math.abs(number)) return Optional.empty();
         }
         return Optional.empty();
     }
@@ -145,13 +152,13 @@ public class Fraction implements Calculable<Fraction> {
          Optional<Integer> optDen = isMultipleOf(fraction.getDenominator(),number);
          if(number>Math.min(fraction.numerator, fraction.denominator)) return fraction;
          if(optNum.isEmpty()  || optDen.isEmpty()) return simplify(fraction,++number);
-         return simplify(Fraction.build(optNum.get(),optDen.get()),2);
+         return simplify(Fraction.build(optNum.get(), optDen.get()),2);
      }
      private Fraction simplifyDirect(){
-         int min = Math.min(Math.abs(numerator),Math.abs(denominator));
+         int min = Math.min(Math.abs(numerator), Math.abs(denominator));
          if(min == Math.abs(numerator)){
              Optional<Integer> optDen = isMultipleOf(denominator,min);
-             optDen.ifPresent(den->set(1,den));
+             optDen.ifPresent(den->set(numerator > 0 ? 1 : -1, den));
          }else{
              Optional<Integer> optNum = isMultipleOf(numerator,min);
              optNum.ifPresent(num->set(num,1));

@@ -9,6 +9,5 @@ public interface Calculable<T> {
     T multiply (T thing);
     T exponent (int number);
     T square ();
-    T invert ();
-    T simplify();
+    T inverse();
 }

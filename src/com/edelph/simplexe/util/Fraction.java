@@ -129,32 +129,32 @@ public class Fraction implements Calculable<Fraction> {
         this.set(simplify(simplifyDirect(),2));
         return this;
     }
-     public int isMultipleOf(int number, int of){
-        if(Math.abs(number) == of) return  number/number;
+    public Optional<Integer> isMultipleOf(int number, int of){
+        if(Math.abs(number) == of) return  Optional.empty();
         for (int i = 2; i < number; i++){
             int result = i*of;
-            if( result == number) return i;
-            if (result> number) return -1;
+            if( result == number) return Optional.of(i);
+            if (result> number) return Optional.empty();
         }
-        return -1;
-     }
+        return Optional.empty();
+    }
 
 
      private Fraction simplify(Fraction fraction, int number){
-         int num = isMultipleOf(fraction.getNumerator(),number);
-         int den = isMultipleOf(fraction.getDenominator(),number);
+         Optional<Integer> optNum = isMultipleOf(fraction.getNumerator(),number);
+         Optional<Integer> optDen = isMultipleOf(fraction.getDenominator(),number);
          if(number>Math.min(fraction.numerator, fraction.denominator)) return fraction;
-         if(num < 0 || den < 0) return simplify(fraction,++number);
-         return simplify(Fraction.build(num,den),2);
+         if(optNum.isEmpty()  || optDen.isEmpty()) return simplify(fraction,++number);
+         return simplify(Fraction.build(optNum.get(),optDen.get()),2);
      }
      private Fraction simplifyDirect(){
          int min = Math.min(Math.abs(numerator),Math.abs(denominator));
          if(min == Math.abs(numerator)){
-             int den = isMultipleOf(denominator,min);
-             if(den>0) set(1,den);
+             Optional<Integer> optDen = isMultipleOf(denominator,min);
+             optDen.ifPresent(den->set(1,den));
          }else{
-             int num = isMultipleOf(numerator,min);
-             if(num>0) set(num,1);
+             Optional<Integer> optNum = isMultipleOf(numerator,min);
+             optNum.ifPresent(num->set(num,1));
          }
          return this;
      }

@@ -10,7 +10,6 @@ public class Fraction implements Calculable<Fraction> {
     public static Fraction build(int numerator, int denominator) {
         return new Fraction(numerator, denominator);
     }
-
     public static Fraction build(String number){
         String[] tmp = number.trim().split("/");
         if(tmp.length == 2){
@@ -30,6 +29,7 @@ public class Fraction implements Calculable<Fraction> {
     }
 
     public Fraction(int numerator, int denominator) {
+        if(numerator == 0 && denominator!=0) denominator = 1;
         if((numerator<0 && denominator<0) || (numerator>0 && denominator<0)) {
             this.denominator = -denominator;
             this.numerator = -numerator;
@@ -132,9 +132,8 @@ public class Fraction implements Calculable<Fraction> {
         return Fraction.build(denominator,numerator);
     }
 
-    public Fraction simplify() {
+    public void simplify() {
         this.set(simplify(simplifyDirect(),2));
-        return this;
     }
     public Optional<Integer> isMultipleOf(int number, int of){
         if(Math.abs(number) == of) return  Optional.of(1);
@@ -150,7 +149,7 @@ public class Fraction implements Calculable<Fraction> {
      private Fraction simplify(Fraction fraction, int number){
          Optional<Integer> optNum = isMultipleOf(fraction.getNumerator(),number);
          Optional<Integer> optDen = isMultipleOf(fraction.getDenominator(),number);
-         if(number>Math.min(fraction.numerator, fraction.denominator)) return fraction;
+         if(number>Math.min(Math.abs(fraction.numerator), Math.abs(fraction.denominator))) return fraction;
          if(optNum.isEmpty()  || optDen.isEmpty()) return simplify(fraction,++number);
          return simplify(Fraction.build(optNum.get(), optDen.get()),2);
      }
@@ -168,18 +167,33 @@ public class Fraction implements Calculable<Fraction> {
 
     @Override
     public String toString() {
+        if(isInfinite()) return "Fraction(infinie)";
         if(denominator == 1) return "Fraction(" + numerator + ")";
         return "Fraction(" + numerator +"/" + denominator +')';
     }
     public String get(){
+        if(isInfinite()) {
+            if(numerator<0) return "-infinie";
+            return "+infinie";
+        };
         if(denominator == 1) return String.valueOf(numerator);
         return  + numerator +"/" + denominator ;
     }
-    public Double toDouble() {
-        return (double) (numerator / denominator);
+    public Optional<Double> toDouble() {
+        try{
+            double d = Double.parseDouble(String.valueOf(numerator)) / Double.parseDouble(String.valueOf(denominator));
+            return Optional.of(d);
+        }catch (ArithmeticException ae){
+            return Optional.empty();
+        }
     }
-    public Float toFloat() {
-        return (float) (numerator / denominator);
+    public Optional<Float> toFloat() {
+        try{
+            float d = Float.parseFloat(String.valueOf(numerator)) / Float.parseFloat(String.valueOf(denominator));
+            return Optional.of( (d));
+        }catch (ArithmeticException ae){
+            return Optional.empty();
+        }
     }
     public void set(Fraction fraction){
         this.denominator = fraction.denominator;
@@ -188,5 +202,12 @@ public class Fraction implements Calculable<Fraction> {
     public void set(int numerator, int denominator){
         this.denominator = denominator;
         this.numerator = numerator;
+    }
+
+    public boolean isInfinite(){
+        return (numerator != 0 && denominator == 0 );
+    }
+    public boolean isNegative(){
+        return numerator < 0;
     }
 }

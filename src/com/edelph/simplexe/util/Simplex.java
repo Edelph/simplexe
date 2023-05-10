@@ -2,12 +2,10 @@ package com.edelph.simplexe.util;
 
 import org.w3c.dom.ls.LSOutput;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class Simplex {
-    private int maxIndexVariable=0;
+    private int maxIndexVariable = 0;
     private List<Equation> equations;
     private Equation MAX ;
     private List<Fraction> deltaJ ;
@@ -17,6 +15,7 @@ public class Simplex {
     private List<List<Fraction>> mainSimplex_An;
     private Fraction Z = Fraction.build("0");
     private List<Fraction> A0;
+    private HashMap<EleMath, Fraction> results;
 
     public Simplex() {
         deltaJ = new ArrayList<>();
@@ -60,11 +59,14 @@ public class Simplex {
         }
     }
     public void calculate(){
+        int i = 0;
         Optional<Integer> indexColumnPivot = this.getIndexColumnPivotInDeltaJ();
         while (indexColumnPivot.isPresent()) {
             next(indexColumnPivot.get());
             indexColumnPivot = this.getIndexColumnPivotInDeltaJ();
         }
+        this.getResults();
+        this.showResults();
     }
 
     private Optional<Integer> getIndexLinePivot(int indexColumnPivot){
@@ -76,13 +78,12 @@ public class Simplex {
             newList.add(currentA0.divide(linePivot));
         }
         // get Index of Minimum and positive
-
         Fraction fraction = newList.get(0);
         int index = 0;
         for (int i = 1; i < newList.size(); i++) {
             Fraction currentFraction = newList.get(i);
             if(!currentFraction.isInfinite()){
-                if(fraction.isInfinite()){
+                if(fraction.isInfinite() || fraction.isNegative()){
                     fraction = currentFraction;
                     index = i;
                 }else{
@@ -314,6 +315,28 @@ public class Simplex {
             return true;
         }
         return false;
+    }
+
+    private void showResults(){
+        Iterator<EleMath> iterator = this.results.keySet().iterator();
+        System.out.println("\n******** Results *******");
+        while (iterator.hasNext()) {
+            EleMath eleMath = iterator.next();
+            Fraction fraction = this.results.get(eleMath);
+            System.out.print(eleMath.get()+ " = "+ fraction.get()+"  ");
+        }
+        System.out.print("\t\t Z = "+this.Z.get());
+        System.out.println("\n");
+    }
+
+    private void getResults(){
+        this.results = new HashMap<EleMath, Fraction>();
+        for (int i = 0 ; i < this.I.size(); i++) {
+            int index = Integer.parseInt(this.I.get(i).get());
+            if(index <= this.maxIndexVariable){
+                this.results.put(new EleMath("x"+index),this.A0.get(i));
+            }
+        }
     }
 
 

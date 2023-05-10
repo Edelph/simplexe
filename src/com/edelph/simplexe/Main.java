@@ -7,25 +7,18 @@ import java.util.Optional;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
-//        System.out.println("2x_1 +3x_3");
-//        TestSimplex testSimplex = new TestSimplex();
-
-//
-
-//        String equation = " 2 x1 + 3 x2 - 2 x3 -  2 x1 + 3 x2 - 2 x3 <= 122223 ";
-////
-//
-//        Equation equation1 = new Equation(equation);
-////        System.out.println(equation.split("").length);
-//        System.out.println(equation1.get());
-
         Simplex simplex = new Simplex();
-        Equation equation1 = new Equation("x1 <= 1000 ");
-        Equation equation2 = new Equation("x2 <= 500 ");
-        Equation equation3 = new Equation("x3 <= 1500 ");
-        Equation equation4 = new Equation("3 x1 + 6x2 + 2 x3 <= 6750 ");
-        Equation max = new Equation("4 x1 + 12 x2 + 3 x3");
+//        Equation equation2 = new Equation("x1 <= 1000 ");
+//        Equation equation4 = new Equation("x2 <= 500 ");
+//        Equation equation1 = new Equation("x3 <= 1500 ");
+//        Equation equation3 = new Equation("3 x1 + 6x2 + 2 x3 <= 6750 ");
+//        Equation max = new Equation("4 x1 + 12 x2 + 3 x3");
+
+        Equation equation1 = new Equation("x1 <= 4900 ");
+        Equation equation2 = new Equation("x2 <= 5400 ");
+        Equation equation3 = new Equation("x3 <= 2000 ");
+        Equation equation4 = new Equation("36 x1 + 28x2 + 63 x3 <= 252000 ");
+        Equation max = new Equation("3 x1 + 2 x2 + 4 x3");
         simplex.setMax(max);
         simplex.
                 setEquation(equation1).

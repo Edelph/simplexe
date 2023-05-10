@@ -4,14 +4,9 @@
     <list default="true" id="b00aa8e5-dd6e-48cf-ae07-cf0948507a47" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/EleMath.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/EleMath.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/Equation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/Equation.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/Simplex.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/Simplex.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/edelph/simplexe/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/edelph/simplexe/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/edelph/simplexe/util/EleMath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/edelph/simplexe/util/EleMath.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/edelph/simplexe/util/Equation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/edelph/simplexe/util/Equation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/edelph/simplexe/util/Simplex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/edelph/simplexe/util/Simplex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/edelph/simplexe/util/TestSimplex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/edelph/simplexe/util/TestSimplex.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +106,7 @@
       <workItem from="1683375087087" duration="78000" />
       <workItem from="1683521396871" duration="27495000" />
       <workItem from="1683552745377" duration="2705000" />
-      <workItem from="1683714358949" duration="25948000" />
+      <workItem from="1683714358949" duration="31457000" />
     </task>
     <servers />
   </component>
@@ -127,22 +122,22 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="463" y="125" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1683375171125" />
-    <state width="636" height="358" key="GridCell.Tab.0.bottom" timestamp="1683745109216">
+    <state width="840" height="472" key="GridCell.Tab.0.bottom" timestamp="1683750626855">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="636" height="358" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1683745109216" />
-    <state width="636" height="358" key="GridCell.Tab.0.center" timestamp="1683745109216">
+    <state width="840" height="472" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1683750626855" />
+    <state width="840" height="472" key="GridCell.Tab.0.center" timestamp="1683750626855">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="636" height="358" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1683745109216" />
-    <state width="636" height="358" key="GridCell.Tab.0.left" timestamp="1683745109216">
+    <state width="840" height="472" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1683750626855" />
+    <state width="840" height="472" key="GridCell.Tab.0.left" timestamp="1683750626855">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="636" height="358" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1683745109216" />
-    <state width="636" height="358" key="GridCell.Tab.0.right" timestamp="1683745109216">
+    <state width="840" height="472" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1683750626855" />
+    <state width="840" height="472" key="GridCell.Tab.0.right" timestamp="1683750626855">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="636" height="358" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1683745109216" />
+    <state width="840" height="472" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1683750626855" />
     <state width="1322" height="227" key="GridCell.Tab.1.bottom" timestamp="1683723597477">
       <screen x="0" y="0" width="1366" height="738" />
     </state>

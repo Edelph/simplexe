@@ -2,6 +2,7 @@ package com.edelph.simplexe.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Equation {
     private List<EleMath> left = new ArrayList<>();
@@ -11,6 +12,7 @@ public class Equation {
     public Equation(String equation) {
         if(equation.contains(">=")) separateEquationAndEqual(equation, ">=");
         if(equation.contains("<=")) separateEquationAndEqual(equation, "<=");
+        if(!equation.contains("<=") && !equation.contains(">=")) equationToEleMath(equation);
     }
 
     private void separateEquationAndEqual(String equation, String separator) {
@@ -46,6 +48,9 @@ public class Equation {
 
     @Override
     public String toString() {
+        if(right==null) return "Equation{" +
+                "left=" + left +
+                '}';
         return "Equation{" +
                 "left=" + left +
                 ", right=" + right +
@@ -67,6 +72,57 @@ public class Equation {
     }
 
     public String get(){
+        if (right==null) return getLeft();
         return getLeft()+ " " + separator+ " " + right.get();
+    }
+
+    public int getMaxIndex(){
+        int max = 0;
+        for (EleMath elem: this.left) {
+            if(elem.index>max) max = elem.index;
+        }
+        return max;
+    }
+
+    public boolean hasIndex(int index){
+        for (EleMath elem: this.left) {
+            if(elem.index==index) return true;
+        }
+        return false;
+    }
+    public Optional<Fraction> getValueIndex(int index){
+        for (EleMath elem: this.left) {
+            if(elem.index==index) return Optional.of(elem.value);
+        }
+        return Optional.empty();
+    }
+    public boolean addGapVariable(int index){
+        if(right == null){
+            this.left.add(new EleMath("0 x"+index)) ;
+            return true;
+        }else if(separator.equals("<=")){
+            this.left.add(new EleMath("x"+index)) ;
+            separator = "=";
+            return true;
+        }
+        return false;
+    }
+    public List<Fraction> getAllValueAsList(int max){
+        List<Fraction> fractionList = new ArrayList<>();
+        for (int i = 1; i <= max; i++){
+            Optional<Fraction> optionalFraction = getValueIndex(i);
+
+            if(optionalFraction.isPresent()) fractionList.add(optionalFraction.get());
+            else fractionList.add(Fraction.build("0"));
+        }
+        return fractionList;
+    }
+
+    public String getSeparator() {
+        return separator;
+    }
+
+    public Fraction getRight() {
+        return right;
     }
 }

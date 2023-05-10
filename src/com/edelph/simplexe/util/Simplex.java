@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class Simplex {
-    private List<String> equation;
-    private String MAX ;
+    private int maxIndexVariable=0;
+    private List<Equation> equations;
+    private Equation MAX ;
     private List<Fraction> deltaJ ;
     private List<Fraction> Ci;
     private List<Fraction> Cj;
@@ -23,19 +24,24 @@ public class Simplex {
         Cj = new ArrayList<>();
         I = new ArrayList<>();
         A0 = new ArrayList<>();
+        equations = new ArrayList<>();
         mainSimplex_An = new ArrayList<>();
     }
 
 
-    public void setEquation(List<String> equation) {
-        this.equation = equation;
+    public void setEquation(List<Equation> equations) {
+        this.equations = equations;
     }
-    public Simplex setEquation(String equation) {
-        this.equation.add(equation);
+    public Simplex setEquation(Equation equation) {
+        this.equations.add(equation);
         return this;
     }
-    public void setMax(String maxZ){
+    public void setMax(Equation maxZ){
         MAX = maxZ;
+    }
+
+    public Equation getMAX() {
+        return MAX;
     }
 
     public void next(){
@@ -137,6 +143,12 @@ public class Simplex {
         this.Z = lastZ.plus(fPlus);
     }
 
+    public void showEquations(){
+        for (Equation equation : this.equations) {
+            System.out.println(equation.get());
+        }
+    }
+
 
     public void showAn(){
         for (int l = 0; l < mainSimplex_An.size(); l++){
@@ -229,6 +241,81 @@ public class Simplex {
         this.Ci.set(indexLinePivot, this.Cj.get(indexColumnPivot));
         this.I.set(indexLinePivot, Fraction.build(String.valueOf(indexColumnPivot + 1)));
     }
+
+    public boolean isAllLowerAndEquals(){
+        for (Equation equation: this.equations){
+            if(equation.getSeparator().equals(">=")) return false;
+        }
+        return true;
+    }
+    private void setI(){
+        for (int i = this.maxIndexVariable + 1; i <= MAX.getMaxIndex(); i++){
+            this.I.add(Fraction.build(String.valueOf(i)));
+        }
+    }
+    private void setA0(){
+        for (Equation equation : this.equations) {
+            this.A0.add(equation.getRight());
+        }
+    }
+
+    private void setCj(){
+        this.Cj = this.MAX.getAllValueAsList(this.MAX.getMaxIndex());
+    }
+
+    private void setCi(){
+        for (Fraction f : this.I) {
+            Optional<Fraction> optionalFraction = this.MAX.getValueIndex(Integer.parseInt(f.get()));
+            optionalFraction.ifPresent(this.Ci::add);
+        }
+    }
+
+    private int getMaxIndexInEquations(){
+        int maxIndex = 0;
+        for (Equation equation: this.equations) {
+            int tmp = equation.getMaxIndex();
+            if(tmp > maxIndex) maxIndex = tmp;
+        }
+        return maxIndex;
+    }
+
+    public void getMatrixEquations(){
+        this.maxIndexVariable = getMaxIndexInEquations();
+        this.addGapVariableInEquations();
+        int max = getMaxIndexInEquations();
+        for (Equation equation : this.equations) {
+            List<Fraction> list = equation.getAllValueAsList(max);
+            this.mainSimplex_An.add(list);
+        }
+        this.setI();
+        this.setA0();
+        this.setCj();
+        this.setCi();
+        this.setDeltaJ();
+    }
+    private void setDeltaJ(){
+        for (int i = 0; i < this.Cj.size(); i++) {
+            Fraction sum = Fraction.build("0");
+            for (int j = 0; j < this.mainSimplex_An.size(); j++) {
+                sum = sum.plus(this.mainSimplex_An.get(j).get(i).multiply(this.Ci.get(j)));
+            }
+            this.deltaJ.add(this.Cj.get(i).less(sum));
+        }
+    }
+
+    public boolean  addGapVariableInEquations(){
+        int maxIndex = getMaxIndexInEquations();
+        if(isAllLowerAndEquals()){
+            for (Equation equation : equations) {
+                int tmp = ++maxIndex;
+                equation.addGapVariable(tmp);
+                this.MAX.addGapVariable(tmp);
+            }
+            return true;
+        }
+        return false;
+    }
+
 
 
 }

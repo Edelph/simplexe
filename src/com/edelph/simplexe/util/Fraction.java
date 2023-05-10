@@ -179,6 +179,15 @@ public class Fraction implements Calculable<Fraction> {
         if(denominator == 1) return String.valueOf(numerator);
         return  + numerator +"/" + denominator ;
     }
+    public String getAbs(){
+        if(isInfinite()) {
+            return "infinie";
+        };
+        if(denominator == 1) return String.valueOf(Math.abs(numerator));
+        return  Math.abs(numerator) +"/" +Math.abs(denominator);
+    }
+
+
     public Optional<Double> toDouble() {
         try{
             double d = Double.parseDouble(String.valueOf(numerator)) / Double.parseDouble(String.valueOf(denominator));

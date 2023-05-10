@@ -21,12 +21,12 @@ public class TestSimplex {
 //    private String deltatJ = Cj;
 
     public TestSimplex() {
-        Equation equation = new Equation();
-        equation.setEquation("x1<=1000");
-        equation.setEquation("x2<=500");
-        equation.setEquation("x3<=1000");
-        equation.setEquation("3x1+6x2+2x3<=6750");
-        equation.setMAX("4x1+12x2+3x3");
+//        Equation equation = new Equation();
+//        equation.setEquation("x1<=1000");
+//        equation.setEquation("x2<=500");
+//        equation.setEquation("x3<=1000");
+//        equation.setEquation("3x1+6x2+2x3<=6750");
+//        equation.setMAX("4x1+12x2+3x3");
     }
 
 //    public TestSimplex() {

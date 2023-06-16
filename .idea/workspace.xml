@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="b00aa8e5-dd6e-48cf-ae07-cf0948507a47" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Recherche Operationnele.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Recherche Operationnele.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/Calculable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/Calculable.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/EleMath.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/EleMath.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/Equation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/Equation.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/Fraction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/Fraction.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/Simplex.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/Simplex.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/TestSimplex.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/edelph/simplexe/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/edelph/simplexe/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/edelph/simplexe/util/EleMath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/edelph/simplexe/util/EleMath.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/edelph/simplexe/util/Equation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/edelph/simplexe/util/Equation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/edelph/simplexe/util/Fraction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/edelph/simplexe/util/Fraction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/edelph/simplexe/util/Simplex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/edelph/simplexe/util/Simplex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/edelph/simplexe/util/TestSimplex.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +36,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -47,18 +62,29 @@
     <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
-  </component>
-  <component name="RunManager">
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RESTKit.sync.cert.Ide&quot;: &quot;true&quot;,
+    &quot;RESTKit.sync.env.Ide&quot;: &quot;true&quot;,
+    &quot;RESTKit.sync.requestConfig.Ide&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;X:/Projet/demoucron&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pathVariables&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager" selected="Application.MainView">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.edelph.simplexe.Main" />
       <module name="Recherche Operationnele" />
@@ -69,8 +95,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MainView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.edelph.simplexe.view.MainView" />
+      <module name="Recherche Operationnele" />
+      <option name="VM_PARAMETERS" value="--module-path ${PATH_TO_FX} --add-modules javafx.fxml,javafx.controls,javafx.graphics" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.edelph.simplexe.view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MainView" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -87,6 +128,7 @@
       </list>
     </option>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -106,69 +148,21 @@
       <workItem from="1683375087087" duration="78000" />
       <workItem from="1683521396871" duration="27495000" />
       <workItem from="1683552745377" duration="2705000" />
-      <workItem from="1683714358949" duration="31457000" />
+      <workItem from="1683714358949" duration="31674000" />
+      <workItem from="1683890758522" duration="21296000" />
+      <workItem from="1684040191665" duration="4586000" />
+      <workItem from="1684141175003" duration="2472000" />
+      <workItem from="1684660848193" duration="34000" />
+      <workItem from="1685629161425" duration="2158000" />
+      <workItem from="1685702901297" duration="2658000" />
+      <workItem from="1685825493621" duration="163000" />
+      <workItem from="1686812677057" duration="24803000" />
+      <workItem from="1686923053342" duration="128000" />
+      <workItem from="1686932862559" duration="598000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="488" y="54" key="#com.intellij.ide.util.MemberChooser" timestamp="1683740558628">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="488" y="54" key="#com.intellij.ide.util.MemberChooser/0.0.1366.738@0.0.1366.738" timestamp="1683740558628" />
-    <state x="463" y="125" key="FileChooserDialogImpl" timestamp="1683375171125">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="463" y="125" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1683375171125" />
-    <state width="840" height="472" key="GridCell.Tab.0.bottom" timestamp="1683750626855">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state width="840" height="472" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1683750626855" />
-    <state width="840" height="472" key="GridCell.Tab.0.center" timestamp="1683750626855">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state width="840" height="472" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1683750626855" />
-    <state width="840" height="472" key="GridCell.Tab.0.left" timestamp="1683750626855">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state width="840" height="472" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1683750626855" />
-    <state width="840" height="472" key="GridCell.Tab.0.right" timestamp="1683750626855">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state width="840" height="472" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1683750626855" />
-    <state width="1322" height="227" key="GridCell.Tab.1.bottom" timestamp="1683723597477">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state width="1322" height="227" key="GridCell.Tab.1.bottom/0.0.1366.738@0.0.1366.738" timestamp="1683723597477" />
-    <state width="1322" height="227" key="GridCell.Tab.1.center" timestamp="1683723597477">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state width="1322" height="227" key="GridCell.Tab.1.center/0.0.1366.738@0.0.1366.738" timestamp="1683723597477" />
-    <state width="1322" height="227" key="GridCell.Tab.1.left" timestamp="1683723597477">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state width="1322" height="227" key="GridCell.Tab.1.left/0.0.1366.738@0.0.1366.738" timestamp="1683723597477" />
-    <state width="1322" height="227" key="GridCell.Tab.1.right" timestamp="1683723597477">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state width="1322" height="227" key="GridCell.Tab.1.right/0.0.1366.738@0.0.1366.738" timestamp="1683723597477" />
-    <state x="163" y="0" key="SettingsEditor" timestamp="1678968774770">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="163" y="0" key="SettingsEditor/0.0.1366.738@0.0.1366.738" timestamp="1678968774770" />
-    <state x="0" y="0" key="com.intellij.troubleshooting.ui.CollectTroubleshootingInformationDialog" timestamp="1683523455481">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="0" y="0" key="com.intellij.troubleshooting.ui.CollectTroubleshootingInformationDialog/0.0.1366.738@0.0.1366.738" timestamp="1683523455481" />
-    <state x="631" y="184" key="extract.method.dialog" timestamp="1683536735228">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="631" y="184" key="extract.method.dialog/0.0.1366.738@0.0.1366.738" timestamp="1683536735228" />
-    <state x="653" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1683544416972">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="653" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1683544416972" />
+    <option name="version" value="3" />
   </component>
 </project>

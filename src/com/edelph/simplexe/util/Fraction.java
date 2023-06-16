@@ -44,6 +44,10 @@ public class Fraction implements Calculable<Fraction> {
         this.numerator = numerator;
     }
 
+    public void setOpposer(){
+        this.numerator = this.numerator*(-1);
+    }
+
     public int getDenominator() {
         return denominator;
     }

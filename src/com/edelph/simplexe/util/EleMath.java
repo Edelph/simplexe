@@ -93,4 +93,8 @@ public class EleMath {
         if(value.getAbs().equals("1")) return  variable + index;
         return value.getAbs() + " " + variable + index;
     }
+
+    public void setOpposer() {
+        this.value.setOpposer();
+    }
 }

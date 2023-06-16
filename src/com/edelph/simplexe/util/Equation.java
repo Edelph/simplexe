@@ -15,11 +15,20 @@ public class Equation {
         if(!equation.contains("<=") && !equation.contains(">=")) equationToEleMath(equation);
     }
 
+    private void changeSeparateEquationAndEqual(){
+        for (EleMath element: this.left) {
+            element.setOpposer();
+        }
+        this.right.setOpposer();
+        this.separator="<=";
+    }
+
     private void separateEquationAndEqual(String equation, String separator) {
         this.separator=separator;
         String[] tabTmp = equation.split(separator);
         this.right = Fraction.build(tabTmp[1].trim());
         equationToEleMath(tabTmp[0]);
+        if(">=".equals(separator))changeSeparateEquationAndEqual();
     }
     private void equationToEleMath(String equation) {
         String elem = equation.replaceAll(" ", ""); ;
@@ -63,8 +72,9 @@ public class Equation {
         for (EleMath e: left) {
             if(!e.value.isNegative() && output.length()>0){
                 output.append(" + ");
-            }if (e.value.isNegative() && output.length()>0){
-                output.append(" - ");
+            }if (e.value.isNegative() ){
+                if( output.length()>0 )output.append(" - ");
+                        else output.append("-");
             }
             output.append(e.getAbs());
         }
@@ -96,16 +106,13 @@ public class Equation {
         }
         return Optional.empty();
     }
-    public boolean addGapVariable(int index){
+    public void addGapVariable(int index){
         if(right == null){
             this.left.add(new EleMath("0 x"+index)) ;
-            return true;
         }else if(separator.equals("<=")){
             this.left.add(new EleMath("x"+index)) ;
             separator = "=";
-            return true;
         }
-        return false;
     }
     public List<Fraction> getAllValueAsList(int max){
         List<Fraction> fractionList = new ArrayList<>();

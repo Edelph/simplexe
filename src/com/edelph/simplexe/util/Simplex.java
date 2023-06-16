@@ -56,6 +56,8 @@ public class Simplex {
             calculateDeltaJAndZ(indexLinePivot.get(), indexColumnPivot);
             System.out.println("\n\n");
             showAn();
+        }else{
+            System.exit(1);
         }
     }
     public void calculate(){
@@ -78,6 +80,7 @@ public class Simplex {
             newList.add(currentA0.divide(linePivot));
         }
         // get Index of Minimum and positive
+        newList.forEach(System.out::println);
         Fraction fraction = newList.get(0);
         int index = 0;
         for (int i = 1; i < newList.size(); i++) {
@@ -281,6 +284,7 @@ public class Simplex {
     }
 
     public void getMatrixEquations(){
+        showEquations();
         this.maxIndexVariable = getMaxIndexInEquations();
         this.addGapVariableInEquations();
         int max = getMaxIndexInEquations();

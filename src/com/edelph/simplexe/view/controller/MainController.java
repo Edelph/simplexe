@@ -22,7 +22,8 @@ public class MainController {
     private VBox tabContainer;
     @FXML
     private Button btn_equation;
-    Double modal_xx, modal_xy;
+    private Double modal_xx, modal_xy;
+    private static Stage modalEquation ;
 
 
     public void createTable() throws IOException {
@@ -36,20 +37,24 @@ public class MainController {
     }
 
     private void showModalEquation(ActionEvent event) throws IOException {
-        Stage stage = new Stage();
-        FXMLLoader load = new  FXMLLoader(Objects.requireNonNull(MainController.class.getResource("./../fxml/modal-equation.fxml")));
-        Parent root = load.load();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        ModalEquationController controller = load.getController();
-        controller.setStage(stage);
-        stage.setResizable(false);
-        stage.sizeToScene();
-        stage.initStyle(StageStyle.UNDECORATED);
-        stage.initModality(Modality.WINDOW_MODAL);
-        stage.initOwner(((Node)event.getSource()).getScene().getWindow() );
-        stage.show();
-        drawable(root,stage);
+
+        if(modalEquation == null) {
+            modalEquation = new Stage();
+            FXMLLoader load = new FXMLLoader(Objects.requireNonNull(MainController.class.getResource("./../fxml/modal-equation.fxml")));
+            Parent root = load.load();
+            Scene scene = new Scene(root);
+            modalEquation.setScene(scene);
+            ModalEquationController controller = load.getController();
+            controller.setSelf(controller);
+            controller.setStage(modalEquation);
+            modalEquation.setResizable(false);
+            modalEquation.sizeToScene();
+            modalEquation.initStyle(StageStyle.UNDECORATED);
+            modalEquation.initModality(Modality.WINDOW_MODAL);
+            modalEquation.initOwner(((Node) event.getSource()).getScene().getWindow());
+            drawable(root, modalEquation);
+        }
+        modalEquation.show();
     }
 
 

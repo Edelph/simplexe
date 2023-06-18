@@ -12,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class InputController implements Initializable {
@@ -23,7 +24,9 @@ public class InputController implements Initializable {
 
     @FXML
     private TextField input;
-    private HBox self;
+    private static ModalEquationController parent;
+    private Map.Entry<InputController, Node> self;
+
 
     public Label getLabel() {
         return label;
@@ -31,6 +34,7 @@ public class InputController implements Initializable {
     public TextField getInput() {
         return input;
     }
+
 
     public void setNumberEquation(int number) {
         label.setText("Equation " + number + " : ");
@@ -53,11 +57,19 @@ public class InputController implements Initializable {
     }
     @FXML
     void closeEquationClicked(MouseEvent event) {
-        ModalEquationController.nodeList.remove(self);
+        parent.removeEquation(self);
         System.out.println("clicked close");
     }
 
-    public void setSelf(HBox self) {
+    public void setSelf(Map.Entry<InputController, Node> self) {
         this.self = self;
+    }
+
+    public void setParent(ModalEquationController parent) {
+        InputController.parent = parent;
+    }
+
+    public ModalEquationController getParent() {
+        return parent;
     }
 }

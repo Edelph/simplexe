@@ -5,22 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b00aa8e5-dd6e-48cf-ae07-cf0948507a47" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Recherche Operationnele.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Recherche Operationnele.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/Calculable.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/Calculable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/EleMath.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/EleMath.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/Equation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/Equation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/Fraction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/Fraction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/Simplex.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/Simplex.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/util/TestSimplex.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/edelph/simplexe/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/edelph/simplexe/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/edelph/simplexe/util/EleMath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/edelph/simplexe/util/EleMath.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/edelph/simplexe/util/Equation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/edelph/simplexe/util/Equation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/edelph/simplexe/util/Fraction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/edelph/simplexe/util/Fraction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/edelph/simplexe/util/Simplex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/edelph/simplexe/util/Simplex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/edelph/simplexe/util/TestSimplex.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/view/controller/InputController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/view/controller/InputController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/view/controller/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/view/controller/MainController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/view/controller/ModalEquationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/view/controller/ModalEquationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/view/fxml/modal-equation.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Recherche Operationnele/com/edelph/simplexe/view/fxml/modal-equation.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/edelph/simplexe/view/controller/InputController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/edelph/simplexe/view/controller/InputController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/edelph/simplexe/view/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/edelph/simplexe/view/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/edelph/simplexe/view/controller/ModalEquationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/edelph/simplexe/view/controller/ModalEquationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/edelph/simplexe/view/fxml/main-window.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/edelph/simplexe/view/fxml/main-window.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/edelph/simplexe/view/fxml/modal-equation.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/edelph/simplexe/view/fxml/modal-equation.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +38,31 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1686940755" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="master" />
+                    <option name="lastUsedInstant" value="1686940754" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
   <component name="IntelliJConfiguration">
     <option name="PROPERTY_FILES">
       <value>
@@ -56,6 +75,9 @@
     <option name="PROMPT_FOR_KEY_PREFIX" value="false" />
     <option name="LABEL_PART_1" value="&lt;bean:message key=&quot;" />
     <option name="LABEL_PART_2" value="&quot;/&gt;" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2N5KBppTPpIEnRkkg82XjBtLqGL" />
   <component name="ProjectLevelVcsManager">
@@ -71,12 +93,13 @@
     &quot;RESTKit.sync.env.Ide&quot;: &quot;true&quot;,
     &quot;RESTKit.sync.requestConfig.Ide&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_opened_file_path&quot;: &quot;X:/Projet/demoucron&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
@@ -158,7 +181,8 @@
       <workItem from="1685825493621" duration="163000" />
       <workItem from="1686812677057" duration="24803000" />
       <workItem from="1686923053342" duration="128000" />
-      <workItem from="1686932862559" duration="598000" />
+      <workItem from="1686932862559" duration="2938000" />
+      <workItem from="1687072173727" duration="11708000" />
     </task>
     <servers />
   </component>

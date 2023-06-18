@@ -1,18 +1,13 @@
 package com.edelph.simplexe.view.controller;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Orientation;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -36,17 +31,20 @@ public class ModalEquationController implements Initializable {
     @FXML
     private TextField equation;
 
-    public static List<Node> nodeList;
+    private static ModalEquationController self;
+
+    private static LinkedHashMap<InputController, Node>  nodeHashMap;
 
     private static int numberOfEquation = 2;
 
-    Stage stage;
+    private static Stage stage;
+
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         checkMax.setSelected(true);
         getAllEquation();
-
     }
 
     @FXML
@@ -61,8 +59,8 @@ public class ModalEquationController implements Initializable {
 
     @FXML
     void btn_addEquationClicked(ActionEvent event) {
-        numberOfEquation +=1;
-        nodeList.add(addEquation(numberOfEquation));
+        numberOfEquation ++;
+        addEquation(numberOfEquation);
     }
 
     @FXML
@@ -80,40 +78,72 @@ public class ModalEquationController implements Initializable {
         this.stage = stage;
     }
     private void getAllEquation(){
-        if(nodeList == null) {
-            nodeList = new ArrayList<>();
-            nodeList.add(addEquation(1));
-            nodeList.add(addEquation(2));
+        if(nodeHashMap == null) {
+            nodeHashMap = new LinkedHashMap<>();
+            for (int i = 1; i <= numberOfEquation; i++) {
+                addEquation(i);
+            }
         }
         else{
-            for (Node equation: nodeList) {
-                this.equationContainer.getChildren().add(equation);
+            int i = 1;
+            for (Map.Entry<InputController, Node> map : nodeHashMap.entrySet() ) {
+                map.getKey().setNumberEquation(i);
+                this.equationContainer.getChildren().add(map.getValue());
+                i++;
             }
         }
     }
     
 
-    private Node addEquation(int number) {
+    private void addEquation(int number) {
         try {
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("./../fxml/input-equation.fxml")));
             HBox newEquation = loader.load();
             InputController controller = loader.getController();
             controller.setNumberEquation(number);
-            controller.setSelf(newEquation);
+            controller.setSelf(Map.entry(controller,newEquation));
+            if(controller.getParent() == null){
+                controller.setParent(self);
+            }
+
             newEquation.prefWidthProperty().bind(equationContainer.widthProperty());
             this.equationContainer.getChildren().add(newEquation);
             screenSizeChanged();
-            return newEquation;
+            nodeHashMap.put(controller, newEquation);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
+    public void setSelf(ModalEquationController self) {
+        ModalEquationController.self = self;
+    }
     private void screenSizeChanged(){
         if (stage!=null && numberOfEquation <= 10) {
             stage.sizeToScene();
         }
         btn_addEquation.setDisable(numberOfEquation >= 10);
     }
+
+    public void removeEquation(Map.Entry<InputController, Node> map){
+        if(numberOfEquation>2) {
+            nodeHashMap.remove(map.getKey());
+            numberOfEquation = nodeHashMap.size();
+            renameEquation();
+            equationContainer.getChildren().remove(map.getValue());
+            screenSizeChanged();
+        }
+    }
+
+    private void renameEquation(){
+        Iterator<Map.Entry<InputController, Node>> iterator = nodeHashMap.entrySet().iterator();
+        int i = 1;
+        while(iterator.hasNext()) {
+            Map.Entry<InputController, Node> map = iterator.next();
+            map.getKey().setNumberEquation(i);
+            i++;
+        }
+    }
+
 
 }

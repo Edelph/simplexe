@@ -20,6 +20,7 @@ public class MainView extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("./fxml/main-window.fxml"));
         Parent root = loader.load();
         MainController mainController = loader.getController();
+        mainController.setSelf(mainController);
         stage.setScene(new Scene(root));
         stage.setTitle("Algorithm Simplex");
         stage.setResizable(false);

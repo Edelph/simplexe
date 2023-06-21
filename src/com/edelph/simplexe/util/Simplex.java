@@ -151,6 +151,7 @@ public class Simplex {
         for (Equation equation : this.equations) {
             System.out.println(equation.get());
         }
+        System.out.println(this.getMAX().get());
     }
 
 
@@ -214,6 +215,10 @@ public class Simplex {
         for (String colomn : Cj.split(" ")){
             this.Cj.add(Fraction.build(colomn));
         }
+    }
+
+    public Optional<Integer> getPivot(){
+        return this.getIndexColumnPivotInDeltaJ();
     }
 
     private Optional<Integer> getIndexColumnPivotInDeltaJ(){
@@ -321,7 +326,7 @@ public class Simplex {
         return false;
     }
 
-    private void showResults(){
+    public void showResults(){
         Iterator<EleMath> iterator = this.results.keySet().iterator();
         System.out.println("\n******** Results *******");
         while (iterator.hasNext()) {
@@ -343,6 +348,35 @@ public class Simplex {
         }
     }
 
+    public int getMaxIndexVariable() {
+        return maxIndexVariable;
+    }
 
+    public List<Equation> getEquations() {
+        return equations;
+    }
 
+    public List<Fraction> getDeltaJ() {
+        return deltaJ;
+    }
+
+    public List<Fraction> getCi() {
+        return Ci;
+    }
+
+    public List<Fraction> getCj() {
+        return Cj;
+    }
+
+    public List<Fraction> getI() {
+        return I;
+    }
+
+    public List<List<Fraction>> getMainSimplex_An() {
+        return mainSimplex_An;
+    }
+
+    public List<Fraction> getA0() {
+        return A0;
+    }
 }

@@ -1,5 +1,7 @@
 package com.edelph.simplexe.view.controller;
 
+import com.edelph.simplexe.util.Equation;
+import com.edelph.simplexe.util.Simplex;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,12 +41,16 @@ public class ModalEquationController implements Initializable {
 
     private static Stage stage;
 
+    private static List<Equation> equationList;
+    private static Equation maximization;
+    private static MainController mainController;
+
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         checkMax.setSelected(true);
-        getAllEquation();
+        getAllInput();
     }
 
     @FXML
@@ -65,19 +71,24 @@ public class ModalEquationController implements Initializable {
 
     @FXML
     void btn_cancelClicked(ActionEvent event) {
-        this.stage.close();
+        stage.close();
     }
 
     @FXML
     void btn_validClicked(ActionEvent event) {
-        this.stage.close();
+        System.out.println("valide");
+        Simplex simplex = new Simplex();
+        getMaximization(simplex);
+        getAllEquations(simplex);
+        mainController.setSimplex(simplex);
+        stage.close();
     }
 
 
     public void setStage(Stage stage) {
-        this.stage = stage;
+        ModalEquationController.stage = stage;
     }
-    private void getAllEquation(){
+    private void getAllInput(){
         if(nodeHashMap == null) {
             nodeHashMap = new LinkedHashMap<>();
             for (int i = 1; i <= numberOfEquation; i++) {
@@ -92,6 +103,20 @@ public class ModalEquationController implements Initializable {
                 i++;
             }
         }
+    }
+
+    private void getAllEquations(Simplex simplex ){
+        equationList = new ArrayList<>();
+        for (Map.Entry<InputController, Node> map : nodeHashMap.entrySet() ) {
+            Equation equation = map.getKey().getEquation();
+            simplex.setEquation(equation);
+            equationList.add(equation);
+        }
+    }
+
+    private void getMaximization(Simplex simplex){
+        maximization = new Equation(equation.getText());
+        simplex.setMax(maximization);
     }
     
 
@@ -146,4 +171,7 @@ public class ModalEquationController implements Initializable {
     }
 
 
+    public void setMainController(MainController self) {
+        mainController = self;
+    }
 }

@@ -1,5 +1,6 @@
 package com.edelph.simplexe.view.controller;
 
+import com.edelph.simplexe.util.Equation;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -71,5 +72,9 @@ public class InputController implements Initializable {
 
     public ModalEquationController getParent() {
         return parent;
+    }
+
+    public Equation getEquation(){
+        return new Equation(this.input.getText());
     }
 }

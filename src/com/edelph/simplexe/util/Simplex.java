@@ -1,7 +1,5 @@
 package com.edelph.simplexe.util;
 
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.*;
 
 public class Simplex {
@@ -17,6 +15,8 @@ public class Simplex {
     private List<Fraction> A0;
     private HashMap<EleMath, Fraction> results;
 
+    private Optional<Integer> linePivot, columnPivot;
+
     public Simplex() {
         deltaJ = new ArrayList<>();
         Ci = new ArrayList<>();
@@ -25,15 +25,16 @@ public class Simplex {
         A0 = new ArrayList<>();
         equations = new ArrayList<>();
         mainSimplex_An = new ArrayList<>();
+        linePivot = Optional.empty();
+        columnPivot = Optional.empty();
     }
 
 
     public void setEquation(List<Equation> equations) {
         this.equations = equations;
     }
-    public Simplex setEquation(Equation equation) {
+    public void setEquation(Equation equation) {
         this.equations.add(equation);
-        return this;
     }
     public void setMax(Equation maxZ){
         MAX = maxZ;
@@ -44,16 +45,20 @@ public class Simplex {
     }
 
     public void next(){
-        Optional<Integer> indexColumnPivot = this.getIndexColumnPivotInDeltaJ();
-        indexColumnPivot.ifPresent(this::next);
+        if(linePivot.isPresent() && columnPivot.isPresent()){
+            setLinePivot();
+            exchangeCiCjAndI();
+            calculateAnAndA0();
+            calculateDeltaJAndZ();
+        }
     }
-    public void next(int indexColumnPivot){
-        Optional<Integer> indexLinePivot = getIndexLinePivot(indexColumnPivot);
-        if(indexLinePivot.isPresent()){
-            setLinePivot(indexLinePivot.get(), indexColumnPivot);
-            exchangeCiCjAndI(indexLinePivot.get(), indexColumnPivot);
-            calculateAnAndA0(indexLinePivot.get(), indexColumnPivot);
-            calculateDeltaJAndZ(indexLinePivot.get(), indexColumnPivot);
+    public void nextStep(){
+        if(columnPivot.isEmpty()) return;
+        if(linePivot.isPresent()){
+            setLinePivot();
+            exchangeCiCjAndI();
+            calculateAnAndA0();
+            calculateDeltaJAndZ();
             System.out.println("\n\n");
             showAn();
         }else{
@@ -62,25 +67,25 @@ public class Simplex {
     }
     public void calculate(){
         int i = 0;
-        Optional<Integer> indexColumnPivot = this.getIndexColumnPivotInDeltaJ();
-        while (indexColumnPivot.isPresent()) {
-            next(indexColumnPivot.get());
-            indexColumnPivot = this.getIndexColumnPivotInDeltaJ();
+        getIndexColumnPivotInDeltaJ();
+        while (columnPivot.isPresent()) {
+            nextStep();
+            getIndexColumnPivotInDeltaJ();
         }
-        this.getResults();
         this.showResults();
     }
 
-    private Optional<Integer> getIndexLinePivot(int indexColumnPivot){
+    private void getIndexLinePivot(){
         //get New List
+        if(columnPivot.isEmpty()) return ;
+
         List<Fraction> newList = new ArrayList<Fraction>();
         for (int i = 0; i < this.A0.size(); i++){
             Fraction currentA0 = this.A0.get(i);
-            Fraction linePivot = this.mainSimplex_An.get(i).get(indexColumnPivot);
+            Fraction linePivot = this.mainSimplex_An.get(i).get(columnPivot.get());
             newList.add(currentA0.divide(linePivot));
         }
         // get Index of Minimum and positive
-        newList.forEach(System.out::println);
         Fraction fraction = newList.get(0);
         int index = 0;
         for (int i = 1; i < newList.size(); i++) {
@@ -102,49 +107,53 @@ public class Simplex {
                 }
             }
         }
-        if(fraction.isInfinite() || fraction.isNegative()) return Optional.empty();
-        return Optional.of(index);
+        linePivot = Optional.of(index);
+        if(fraction.isInfinite() || fraction.isNegative()) linePivot = Optional.empty();
     }
 
-    private void setLinePivot(int indexLinePivot, int indexColumnPivot){
-        List<Fraction> linePivot = new ArrayList<Fraction>();
-        Fraction pivot = this.mainSimplex_An.get(indexLinePivot).get(indexColumnPivot);
-        for(int i = 0; i < this.mainSimplex_An.get(indexLinePivot).size(); i++){
-            Fraction currentFraction = this.mainSimplex_An.get(indexLinePivot).get(i);
-            this.mainSimplex_An.get(indexLinePivot).set(i, currentFraction.divide(pivot));
+    private void setLinePivot(){
+        if(linePivot.isPresent()&& columnPivot.isPresent()){
+            Fraction pivot = this.mainSimplex_An.get(linePivot.get()).get(columnPivot.get());
+            for(int i = 0; i < this.mainSimplex_An.get(linePivot.get()).size(); i++){
+                Fraction currentFraction = this.mainSimplex_An.get(linePivot.get()).get(i);
+                this.mainSimplex_An.get(linePivot.get()).set(i, currentFraction.divide(pivot));
+            }
+            this.A0.set(linePivot.get(), this.A0.get(linePivot.get()).divide(pivot));
         }
-        this.A0.set(indexLinePivot, this.A0.get(indexLinePivot).divide(pivot));
     }
-    private void calculateAnAndA0(int indexLinePivot, int indexColumnPivot){
-        for(int i = 0; i < this.mainSimplex_An.size(); i++){
-            Fraction pivot = this.mainSimplex_An.get(i).get(indexColumnPivot);
-            if(i!= indexLinePivot && !this.mainSimplex_An.get(i).get(indexColumnPivot).get().equals("0")){
-                for (int j = 0; j <this.mainSimplex_An.get(i).size(); j++){
-                    Fraction currentFraction = this.mainSimplex_An.get(i).get(j);
-                    Fraction fLess = pivot.multiply(this.mainSimplex_An.get(indexLinePivot).get(j));
-                    this.mainSimplex_An.get(i).set(j, currentFraction.less(fLess));
+    private void calculateAnAndA0(){
+        if(linePivot.isPresent() && columnPivot.isPresent()){
+            for(int i = 0; i < this.mainSimplex_An.size(); i++){
+                Fraction pivot = this.mainSimplex_An.get(i).get(columnPivot.get());
+                if(i!= linePivot.get() && !this.mainSimplex_An.get(i).get(columnPivot.get()).get().equals("0")){
+                    for (int j = 0; j <this.mainSimplex_An.get(i).size(); j++){
+                        Fraction currentFraction = this.mainSimplex_An.get(i).get(j);
+                        Fraction fLess = pivot.multiply(this.mainSimplex_An.get(linePivot.get()).get(j));
+                        this.mainSimplex_An.get(i).set(j, currentFraction.less(fLess));
+                    }
+                    //calculate A0
+                    Fraction lastA0 = this.A0.get(i);
+                    Fraction fLess = pivot.multiply(this.A0.get(linePivot.get()));
+                    this.A0.set(i, lastA0.less(fLess));
                 }
-                //calculate A0
-                Fraction lastA0 = this.A0.get(i);
-                Fraction fLess = pivot.multiply(this.A0.get(indexLinePivot));
-                this.A0.set(i, lastA0.less(fLess));
             }
         }
-
     }
-    private void calculateDeltaJAndZ(int indexLinePivot, int indexColumnPivot){
+    private void calculateDeltaJAndZ(){
         //calculate deltaJ
-        Fraction pivot = this.deltaJ.get(indexColumnPivot);
-        for(int i = 0 ; i < this.deltaJ.size(); i++) {
-            Fraction currentFraction = this.deltaJ.get(i);
-            Fraction fLess = pivot.multiply(this.mainSimplex_An.get(indexLinePivot).get(i));
-            this.deltaJ.set(i, currentFraction.less(fLess));
-        }
+        if(linePivot.isPresent()&& columnPivot.isPresent()) {
+            Fraction pivot = this.deltaJ.get(columnPivot.get());
+            for (int i = 0; i < this.deltaJ.size(); i++) {
+                Fraction currentFraction = this.deltaJ.get(i);
+                Fraction fLess = pivot.multiply(this.mainSimplex_An.get(linePivot.get()).get(i));
+                this.deltaJ.set(i, currentFraction.less(fLess));
+            }
 
-        // calculate Z
-        Fraction lastZ = this.Z;
-        Fraction fPlus = pivot.multiply(this.A0.get(indexLinePivot));
-        this.Z = lastZ.plus(fPlus);
+            // calculate Z
+            Fraction lastZ = this.Z;
+            Fraction fPlus = pivot.multiply(this.A0.get(linePivot.get()));
+            this.Z = lastZ.plus(fPlus);
+        }
     }
 
     public void showEquations(){
@@ -217,11 +226,9 @@ public class Simplex {
         }
     }
 
-    public Optional<Integer> getPivot(){
-        return this.getIndexColumnPivotInDeltaJ();
-    }
 
-    private Optional<Integer> getIndexColumnPivotInDeltaJ(){
+    private void getIndexColumnPivotInDeltaJ(){
+        columnPivot = Optional.empty();
         int index = 0;
         Fraction fraction = this.deltaJ.get(0);
         for (int i = 1; i < this.deltaJ.size(); i++) {
@@ -233,10 +240,9 @@ public class Simplex {
                 }
             }
         }
-       if(fraction.toDouble().isPresent()){
-           if (fraction.toDouble().get() > 0) return Optional.of(index);
-       }
-        return Optional.empty();
+       if(fraction.toDouble().isPresent() && fraction.toDouble().get() > 0){
+           columnPivot = Optional.of(index);
+       }else linePivot = Optional.empty();
     }
 
     public Fraction getZ() {
@@ -246,9 +252,11 @@ public class Simplex {
         Z = z;
     }
 
-    private void exchangeCiCjAndI(int indexLinePivot, int indexColumnPivot){
-        this.Ci.set(indexLinePivot, this.Cj.get(indexColumnPivot));
-        this.I.set(indexLinePivot, Fraction.build(String.valueOf(indexColumnPivot + 1)));
+    private void exchangeCiCjAndI(){
+        if(linePivot.isPresent() && columnPivot.isPresent()){
+            this.Ci.set(linePivot.get(), this.Cj.get(columnPivot.get()));
+            this.I.set(linePivot.get(), Fraction.build(String.valueOf(columnPivot.get() + 1)));
+        }
     }
 
     public boolean isAllLowerAndEquals(){
@@ -289,7 +297,6 @@ public class Simplex {
     }
 
     public void getMatrixEquations(){
-        showEquations();
         this.maxIndexVariable = getMaxIndexInEquations();
         this.addGapVariableInEquations();
         int max = getMaxIndexInEquations();
@@ -303,6 +310,11 @@ public class Simplex {
         this.setCi();
         this.setDeltaJ();
     }
+
+    public void getAllPivot(){
+        getIndexColumnPivotInDeltaJ();
+        getIndexLinePivot();
+    }
     private void setDeltaJ(){
         for (int i = 0; i < this.Cj.size(); i++) {
             Fraction sum = Fraction.build("0");
@@ -313,7 +325,7 @@ public class Simplex {
         }
     }
 
-    public boolean  addGapVariableInEquations(){
+    public void addGapVariableInEquations(){
         int maxIndex = getMaxIndexInEquations();
         if(isAllLowerAndEquals()){
             for (Equation equation : equations) {
@@ -321,12 +333,11 @@ public class Simplex {
                 equation.addGapVariable(tmp);
                 this.MAX.addGapVariable(tmp);
             }
-            return true;
         }
-        return false;
     }
 
     public void showResults(){
+        getResults();
         Iterator<EleMath> iterator = this.results.keySet().iterator();
         System.out.println("\n******** Results *******");
         while (iterator.hasNext()) {
@@ -338,15 +349,19 @@ public class Simplex {
         System.out.println("\n");
     }
 
-    private void getResults(){
-        this.results = new HashMap<EleMath, Fraction>();
+
+
+    private Optional<HashMap<EleMath, Fraction>> getResults(){
+        this.results = new HashMap<>();
         for (int i = 0 ; i < this.I.size(); i++) {
             int index = Integer.parseInt(this.I.get(i).get());
             if(index <= this.maxIndexVariable){
                 this.results.put(new EleMath("x"+index),this.A0.get(i));
             }
         }
+        return Optional.of(this.results);
     }
+
 
     public int getMaxIndexVariable() {
         return maxIndexVariable;
@@ -378,5 +393,13 @@ public class Simplex {
 
     public List<Fraction> getA0() {
         return A0;
+    }
+
+    public Optional<Integer> getLinePivot() {
+        return linePivot;
+    }
+
+    public Optional<Integer> getColumnPivot() {
+        return columnPivot;
     }
 }

@@ -11,13 +11,12 @@ import javafx.stage.Stage;
 
 public class MainView extends Application {
 
-    public void start(String[] args){
+    public static void main(String[] args){
         launch(args);
     }
     @Override
     public void start(Stage stage) throws Exception {
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("./fxml/main-window.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/edelph/simplexe/view/fxml/main-window.fxml"));
         Parent root = loader.load();
         MainController mainController = loader.getController();
         mainController.setSelf(mainController);

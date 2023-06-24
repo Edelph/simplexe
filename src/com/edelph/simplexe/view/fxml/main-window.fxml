@@ -17,7 +17,7 @@
    <center>
       <ScrollPane prefHeight="335.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <content>
-            <VBox fx:id="tabContainer" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="366.0" prefWidth="784.0" spacing="40.0" style="-fx-background-color: #F77777;" />
+            <VBox fx:id="tabContainer" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="366.0" prefWidth="784.0" spacing="40.0" />
          </content>
       </ScrollPane>
    </center>

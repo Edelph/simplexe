@@ -122,7 +122,7 @@ public class ModalEquationController implements Initializable {
 
     private void addEquation(int number) {
         try {
-            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("./../fxml/input-equation.fxml")));
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/com/edelph/simplexe/view/fxml/input-equation.fxml")));
             HBox newEquation = loader.load();
             InputController controller = loader.getController();
             controller.setNumberEquation(number);

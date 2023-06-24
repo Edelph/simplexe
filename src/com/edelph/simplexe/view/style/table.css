@@ -23,3 +23,12 @@
     /*-fx-background-color: blueviolet;*/
 
 }
+#cellPivot{
+    -fx-background-color: #91FDB8D2;
+}
+.linePivot{
+    -fx-background-color: rgba(167, 243, 251, 0.82);
+}
+#pivot{
+    -fx-background-color: rgb(169, 68, 255);
+}

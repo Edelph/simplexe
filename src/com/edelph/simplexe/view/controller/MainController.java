@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -13,18 +14,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
-public class MainController {
+public class MainController implements Initializable {
     @FXML
     private VBox tabContainer;
 
@@ -37,11 +38,12 @@ public class MainController {
     private static Stage modalEquation ;
 
     private static Simplex simplex;
+    private int rowPivot=-1;
     private static MainController self;
 
 
     public void createTable(Simplex simplex) throws IOException {
-        this.tabContainer.getChildren().add(Tableaux.build(simplex));
+        this.tabContainer.getChildren().add(Tableaux.build(simplex,rowPivot));
         tabContainer.setAlignment(Pos.CENTER);
         tabContainer.setPadding(new Insets(20,5,15,5));
     }
@@ -57,13 +59,23 @@ public class MainController {
     }
 
     void calculateSimplex() throws IOException {
-        showEquation();
+        container.getChildren().add(ShowEquationPane.build(simplex));
+        HBox.setHgrow(container.getChildren().get(2), Priority.ALWAYS);
         simplex.getMatrixEquations();
-        Optional<Integer> pivot = simplex.getPivot();
+        simplex.getAllPivot();
+        createTable(simplex);
+        if(simplex.getLinePivot().isPresent())
+            rowPivot = simplex.getLinePivot().get();
+        Optional<Integer> pivot = simplex.getColumnPivot();
+
         while (pivot.isPresent()){
-            simplex.next(pivot.get());
+            simplex.next();
+            simplex.getAllPivot();
             createTable(simplex);
-            pivot = simplex.getPivot();
+            simplex.getAllPivot();
+            pivot = simplex.getColumnPivot();
+            if(simplex.getLinePivot().isPresent())
+                rowPivot = simplex.getLinePivot().get();
         }
         simplex.showResults();
     }
@@ -72,7 +84,7 @@ public class MainController {
 
         if(modalEquation == null) {
             modalEquation = new Stage();
-            FXMLLoader load = new FXMLLoader(Objects.requireNonNull(MainController.class.getResource("./../fxml/modal-equation.fxml")));
+            FXMLLoader load = new FXMLLoader(Objects.requireNonNull(MainController.class.getResource("/com/edelph/simplexe/view/fxml/modal-equation.fxml")));
             Parent root = load.load();
             Scene scene = new Scene(root);
             modalEquation.setScene(scene);
@@ -102,12 +114,6 @@ public class MainController {
         });
     }
 
-    private void showEquation(){
-        GridPane equationContainer = new GridPane();
-        equationContainer.add(setEquationLabel("eedelph1"), 0,0);
-        equationContainer.add(setEquationLabel("eedelph2"), 0,1);
-        container.getChildren().add(equationContainer);
-    }
     private Label setEquationLabel(String equation){
         return new Label(equation);
     }
@@ -117,5 +123,10 @@ public class MainController {
 
     public void setSelf(MainController mainController) {
         self = mainController;
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        container.setAlignment(Pos.CENTER);
     }
 }

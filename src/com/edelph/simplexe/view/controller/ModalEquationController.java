@@ -76,11 +76,11 @@ public class ModalEquationController implements Initializable {
 
     @FXML
     void btn_validClicked(ActionEvent event) {
-        System.out.println("valide");
         Simplex simplex = new Simplex();
         getMaximization(simplex);
         getAllEquations(simplex);
         mainController.setSimplex(simplex);
+        mainController.setBtnAble();
         stage.close();
     }
 

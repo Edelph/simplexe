@@ -6,16 +6,12 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="599.0" prefWidth="788.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.edelph.simplexe.view.controller.MainController">
-   <bottom>
-      <Pane prefHeight="74.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
-   </bottom>
+<BorderPane prefHeight="635.0" prefWidth="807.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.edelph.simplexe.view.controller.MainController">
    <center>
-      <ScrollPane prefHeight="335.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <ScrollPane pannable="true" prefHeight="335.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <content>
             <VBox fx:id="tabContainer" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="366.0" prefWidth="784.0" spacing="40.0" />
          </content>
@@ -41,4 +37,7 @@
          </children>
       </VBox>
    </top>
+   <bottom>
+      <VBox fx:id="resultsPane" prefHeight="92.0" prefWidth="788.0" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>

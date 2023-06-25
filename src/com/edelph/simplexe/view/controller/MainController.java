@@ -1,5 +1,7 @@
 package com.edelph.simplexe.view.controller;
 
+import com.edelph.simplexe.util.EleMath;
+import com.edelph.simplexe.util.Fraction;
 import com.edelph.simplexe.util.Simplex;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,13 +23,14 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
     @FXML
-    private VBox tabContainer;
+    private VBox tabContainer, resultsPane;
 
     @FXML
     private HBox container;
@@ -45,6 +48,7 @@ public class MainController implements Initializable {
     public void createTable(Simplex simplex) throws IOException {
         this.tabContainer.getChildren().add(Tableaux.build(simplex,rowPivot));
         tabContainer.setAlignment(Pos.CENTER);
+        tabContainer.setFillWidth(true);
         tabContainer.setPadding(new Insets(20,5,15,5));
     }
 
@@ -59,7 +63,10 @@ public class MainController implements Initializable {
     }
 
     void calculateSimplex() throws IOException {
-        container.getChildren().add(ShowEquationPane.build(simplex));
+        tabContainer.getChildren().clear();
+        if(container.getChildren().size()==2)
+            container.getChildren().add(ShowEquationPane.build(simplex));
+        else container.getChildren().set(2,ShowEquationPane.build(simplex));
         HBox.setHgrow(container.getChildren().get(2), Priority.ALWAYS);
         simplex.getMatrixEquations();
         simplex.getAllPivot();
@@ -77,7 +84,17 @@ public class MainController implements Initializable {
             if(simplex.getLinePivot().isPresent())
                 rowPivot = simplex.getLinePivot().get();
         }
-        simplex.showResults();
+        Optional<HashMap<EleMath, Fraction>> resultes = simplex.getResults();
+
+        if(resultes.isPresent()){
+            resultsPane.getChildren().clear();
+            Label l = new Label("***** Resultats *****");
+            l.getStyleClass().add("title");
+            resultsPane.getChildren().add(l);
+            resultsPane.getChildren().add(ShowEquationPane.build(resultes.get(),simplex.getZ()));
+            resultsPane.setAlignment(Pos.CENTER);
+        }
+        btn_calculez.setDisable(true);
     }
 
     private void showModalEquation(ActionEvent event) throws IOException {
@@ -120,6 +137,10 @@ public class MainController implements Initializable {
     public void setSimplex(Simplex simplex){
         MainController.simplex = simplex;
     }
+    public void setBtnAble(){
+        btn_calculez.setDisable(false);
+        rowPivot=-1;
+    }
 
     public void setSelf(MainController mainController) {
         self = mainController;
@@ -128,5 +149,6 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         container.setAlignment(Pos.CENTER);
+        btn_calculez.setDisable(true);
     }
 }

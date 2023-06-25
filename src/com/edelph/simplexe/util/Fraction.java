@@ -21,6 +21,8 @@ public class Fraction implements Calculable<Fraction> {
             if(tmp[0].equals("")) return Fraction.build(1, Integer.parseInt(tmp[1].trim()));
             return new Fraction(Integer.parseInt(tmp[0].trim()),Integer.parseInt(tmp[1].trim()));
         }
+        if(number.contains(",")) return Fraction.toFraction(number,",");
+        if(number.contains(".")) return Fraction.toFraction(number,".");
         return new Fraction(Integer.parseInt(number));
     }
 
@@ -39,6 +41,13 @@ public class Fraction implements Calculable<Fraction> {
             this.numerator = numerator;
         }
         this.simplify();
+    }
+    private static Fraction toFraction(String number, String separator){
+        number = number.trim();
+        int posVirgule = number.indexOf(separator);
+        int nbZero = number.substring(posVirgule+1).length();
+        String n = number.replace( separator, "");
+        return Fraction.build(Integer.parseInt(n), (int) Math.pow(10, nbZero));
     }
     public Fraction(int numerator) {
         this.numerator = numerator;

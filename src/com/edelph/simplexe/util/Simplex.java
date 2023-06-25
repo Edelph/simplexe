@@ -66,9 +66,11 @@ public class Simplex {
         }
     }
     public void calculate(){
-        int i = 0;
         getIndexColumnPivotInDeltaJ();
+
         while (columnPivot.isPresent()) {
+            System.out.println("columnPivot = " + columnPivot.get());
+            getIndexLinePivot();
             nextStep();
             getIndexColumnPivotInDeltaJ();
         }
@@ -337,7 +339,7 @@ public class Simplex {
     }
 
     public void showResults(){
-        getResults();
+//        getResults();
         Iterator<EleMath> iterator = this.results.keySet().iterator();
         System.out.println("\n******** Results *******");
         while (iterator.hasNext()) {
@@ -351,15 +353,18 @@ public class Simplex {
 
 
 
-    private Optional<HashMap<EleMath, Fraction>> getResults(){
-        this.results = new HashMap<>();
-        for (int i = 0 ; i < this.I.size(); i++) {
-            int index = Integer.parseInt(this.I.get(i).get());
-            if(index <= this.maxIndexVariable){
-                this.results.put(new EleMath("x"+index),this.A0.get(i));
+    public Optional<HashMap<EleMath, Fraction>> getResults(){
+        if(columnPivot.isEmpty() || linePivot.isEmpty()){
+            this.results = new HashMap<>();
+            for (int i = 0 ; i < this.I.size(); i++) {
+                int index = Integer.parseInt(this.I.get(i).get());
+                if(index <= this.maxIndexVariable){
+                    this.results.put(new EleMath("x"+index),this.A0.get(i));
+                }
             }
+            return Optional.of(this.results);
         }
-        return Optional.of(this.results);
+        return Optional.empty();
     }
 
 

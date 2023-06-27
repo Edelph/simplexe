@@ -69,6 +69,7 @@ public class MainController implements Initializable {
         else container.getChildren().set(2,ShowEquationPane.build(simplex));
         HBox.setHgrow(container.getChildren().get(2), Priority.ALWAYS);
         simplex.getMatrixEquations();
+        simplex.showAn();
         simplex.getAllPivot();
         createTable(simplex);
         if(simplex.getLinePivot().isPresent())
@@ -151,4 +152,5 @@ public class MainController implements Initializable {
         container.setAlignment(Pos.CENTER);
         btn_calculez.setDisable(true);
     }
+
 }

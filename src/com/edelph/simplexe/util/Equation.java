@@ -15,12 +15,14 @@ public class Equation {
         if(!equation.contains("<=") && !equation.contains(">=")) equationToEleMath(equation);
     }
 
-    private void changeSeparateEquationAndEqual(){
+    public void changeSeparateEquationAndEqual(){
         for (EleMath element: this.left) {
             element.setOpposer();
         }
-        this.right.setOpposer();
-        this.separator="<=";
+        if(!this.separator.equals("=")){
+            this.right.setOpposer();
+            this.separator = this.separator.equals("<=")?  ">=": "<=";
+        }
     }
 
     private void separateEquationAndEqual(String equation, String separator) {

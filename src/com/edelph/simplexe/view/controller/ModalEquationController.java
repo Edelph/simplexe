@@ -40,6 +40,7 @@ public class ModalEquationController implements Initializable {
     private static int numberOfEquation = 2;
 
     private static Stage stage;
+    private boolean maximize = true;
 
     private static List<Equation> equationList;
     private static Equation maximization;
@@ -56,11 +57,13 @@ public class ModalEquationController implements Initializable {
     @FXML
     void checkMaxClicked(ActionEvent event) {
         checkMin.setSelected(!checkMax.isSelected());
+        maximize = checkMax.isSelected();
     }
 
     @FXML
     void checkMinClicked(ActionEvent event) {
         checkMax.setSelected(!checkMin.isSelected());
+        maximize = checkMax.isSelected();
     }
 
     @FXML
@@ -77,6 +80,7 @@ public class ModalEquationController implements Initializable {
     @FXML
     void btn_validClicked(ActionEvent event) {
         Simplex simplex = new Simplex();
+        simplex.setMaximize(maximize);
         getMaximization(simplex);
         getAllEquations(simplex);
         mainController.setSimplex(simplex);

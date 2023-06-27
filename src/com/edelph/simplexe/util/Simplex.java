@@ -14,7 +14,7 @@ public class Simplex {
     private Fraction Z = Fraction.build("0");
     private List<Fraction> A0;
     private HashMap<EleMath, Fraction> results;
-
+    private boolean maximize = true;
     private Optional<Integer> linePivot, columnPivot;
 
     public Simplex() {
@@ -38,6 +38,7 @@ public class Simplex {
     }
     public void setMax(Equation maxZ){
         MAX = maxZ;
+        if(!isMaximize()) MAX.changeSeparateEquationAndEqual();
     }
 
     public Equation getMAX() {
@@ -87,21 +88,24 @@ public class Simplex {
             Fraction linePivot = this.mainSimplex_An.get(i).get(columnPivot.get());
             newList.add(currentA0.divide(linePivot));
         }
+        newList.forEach(System.out::println);
         // get Index of Minimum and positive
         Fraction fraction = newList.get(0);
         int index = 0;
         for (int i = 1; i < newList.size(); i++) {
             Fraction currentFraction = newList.get(i);
             if(!currentFraction.isInfinite()){
-                if(fraction.isInfinite() || fraction.isNegative()){
+                if(fraction.isInfinite() || fraction.isNegative() || fraction.toDouble().get() == 0){
                     fraction = currentFraction;
                     index = i;
                 }else{
+                    System.out.println("else");
                     if(currentFraction.toDouble().isPresent() && fraction.toDouble().isPresent()){
                         if( currentFraction.toDouble().get() > 0 &&
                                 (fraction.toDouble().get() > currentFraction.toDouble().get()))
 
                         {
+                            System.out.println("index in" + i);
                             fraction = currentFraction;
                             index = i;
                         }
@@ -109,8 +113,14 @@ public class Simplex {
                 }
             }
         }
+        System.out.println("_________________________________");
+        System.out.println("index : "+ index);
+        System.out.println("_________________________________");
         linePivot = Optional.of(index);
-        if(fraction.isInfinite() || fraction.isNegative()) linePivot = Optional.empty();
+        if(fraction.isInfinite() || fraction.isNegative()) {
+            linePivot = Optional.empty();
+            columnPivot = Optional.empty();
+        };
     }
 
     private void setLinePivot(){
@@ -366,6 +376,19 @@ public class Simplex {
         }
         return Optional.empty();
     }
+    public void trasposeAn(){
+        List<List<Fraction>> copyAn = new ArrayList<>();
+        int size = this.mainSimplex_An.get(0).size();
+        for (int i = 0; i <size ; i++) {
+            copyAn.add(new ArrayList<>());
+        }
+        for (int r = 0; r < mainSimplex_An.size(); r++) {
+            for (int c = 0; c < size; c++) {
+                copyAn.get(c).add(mainSimplex_An.get(r).get(c));
+            }
+        }
+        this.mainSimplex_An = copyAn;
+    }
 
 
     public int getMaxIndexVariable() {
@@ -406,5 +429,14 @@ public class Simplex {
 
     public Optional<Integer> getColumnPivot() {
         return columnPivot;
+    }
+
+    public boolean isMaximize() {
+        return maximize;
+    }
+
+    public void setMaximize(boolean maximize) {
+        this.maximize = maximize;
+        if(!isMaximize() && this.MAX !=null) MAX.changeSeparateEquationAndEqual();
     }
 }

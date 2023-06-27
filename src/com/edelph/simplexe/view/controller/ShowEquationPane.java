@@ -22,7 +22,7 @@ public class ShowEquationPane {
         int row;
         container.getStylesheets().add(Objects.requireNonNull(ShowEquationPane.class.getResource("/com/edelph/simplexe/view/style/showText.css")).toExternalForm());
         container.setHgap(20);
-        container.add(getText("MAXIMISATION","title"),0,0);
+        container.add(getText(simplex.isMaximize()?"MAXIMISATION":"MINIMISATION","title"),0,0);
         container.add(getText(simplex.getMAX().get(), "max"),0,1);
         int nbLine = getNumberLine(equationList.size());
 

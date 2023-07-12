@@ -70,7 +70,6 @@ public class Simplex {
         getIndexColumnPivotInDeltaJ();
 
         while (columnPivot.isPresent()) {
-            System.out.println("columnPivot = " + columnPivot.get());
             getIndexLinePivot();
             nextStep();
             getIndexColumnPivotInDeltaJ();
@@ -88,7 +87,6 @@ public class Simplex {
             Fraction linePivot = this.mainSimplex_An.get(i).get(columnPivot.get());
             newList.add(currentA0.divide(linePivot));
         }
-        newList.forEach(System.out::println);
         // get Index of Minimum and positive
         Fraction fraction = newList.get(0);
         int index = 0;
@@ -99,13 +97,11 @@ public class Simplex {
                     fraction = currentFraction;
                     index = i;
                 }else{
-                    System.out.println("else");
                     if(currentFraction.toDouble().isPresent() && fraction.toDouble().isPresent()){
                         if( currentFraction.toDouble().get() > 0 &&
                                 (fraction.toDouble().get() > currentFraction.toDouble().get()))
 
                         {
-                            System.out.println("index in" + i);
                             fraction = currentFraction;
                             index = i;
                         }
@@ -113,9 +109,6 @@ public class Simplex {
                 }
             }
         }
-        System.out.println("_________________________________");
-        System.out.println("index : "+ index);
-        System.out.println("_________________________________");
         linePivot = Optional.of(index);
         if(fraction.isInfinite() || fraction.isNegative()) {
             linePivot = Optional.empty();

@@ -11,7 +11,7 @@
 
 <BorderPane prefHeight="635.0" prefWidth="807.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.edelph.simplexe.view.controller.MainController">
    <center>
-      <ScrollPane pannable="true" prefHeight="335.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <ScrollPane fx:id="scroll" pannable="true" prefHeight="335.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <content>
             <VBox fx:id="tabContainer" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="366.0" prefWidth="784.0" spacing="40.0" />
          </content>
@@ -20,7 +20,7 @@
    <top>
       <VBox prefHeight="156.0" prefWidth="600.0" BorderPane.alignment="CENTER_LEFT">
          <children>
-            <Label alignment="CENTER" graphicTextGap="6.0" prefHeight="72.0" prefWidth="809.0" style="-fx-background-color: #3726BA;" text="Algorithme Simplexe" textFill="#43dd97">
+            <Label alignment="CENTER" graphicTextGap="6.0" prefHeight="79.0" prefWidth="807.0" style="-fx-background-color: #3726BA;" text="Algorithme Simplexe" textFill="#43dd97">
                <font>
                   <Font name="Eras Bold ITC" size="40.0" />
                </font>

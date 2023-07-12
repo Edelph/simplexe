@@ -126,11 +126,9 @@ public class Tableaux {
         table.add(createTableCii(),0,0);
         table.add(createTableAn(),1,0);
         table.add(createTableA0(),2,0);
-        table.add(getText("Z = "+ simplex.getZ().get(), null),2,1);
+        table.add(getText("Z = "+ simplex.getZ().get(), "zed"),2,1);
         table.add(createTableDeltaJCj(),1,1);
         table.add(title,0,1);
-
-
 
         setStyle();
         return table;
@@ -152,7 +150,7 @@ public class Tableaux {
     }
 
     private void setStyle(){
-        table.getStylesheets().add(Objects.requireNonNull(getClass().getResource("../style/table.css")).toExternalForm());
+        table.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/edelph/simplexe/view/style/table.css")).toExternalForm());
         table.setHgap(10);
         table.setVgap(15);
         table.setId("table");

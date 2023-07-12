@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
@@ -29,6 +30,10 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
+
+    @FXML
+    private ScrollPane scroll;
+
     @FXML
     private VBox tabContainer, resultsPane;
 
@@ -69,7 +74,6 @@ public class MainController implements Initializable {
         else container.getChildren().set(2,ShowEquationPane.build(simplex));
         HBox.setHgrow(container.getChildren().get(2), Priority.ALWAYS);
         simplex.getMatrixEquations();
-        simplex.showAn();
         simplex.getAllPivot();
         createTable(simplex);
         if(simplex.getLinePivot().isPresent())

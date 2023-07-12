@@ -11,17 +11,23 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="boderPane" prefHeight="264.0" style="-fx-background-color: #888888;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.edelph.simplexe.view.controller.ModalEquationController">
+<BorderPane fx:id="boderPane" prefHeight="264.0" style="-fx-border-color: #000;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.edelph.simplexe.view.controller.ModalEquationController">
    <bottom>
-      <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="74.0" prefWidth="436.0" spacing="16.0" style="-fx-background-color: #444444;" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="74.0" prefWidth="436.0" spacing="16.0" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="btn_addEquation" mnemonicParsing="false" onAction="#btn_addEquationClicked" prefHeight="36.0" prefWidth="114.0" text="Ajouter Equation">
                <HBox.margin>
                   <Insets right="33.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="btn_cancel" mnemonicParsing="false" onAction="#btn_cancelClicked" prefHeight="36.0" prefWidth="117.0" text="Annuler" />
-            <Button fx:id="btn_valid" lineSpacing="28.0" mnemonicParsing="false" onAction="#btn_validClicked" prefHeight="36.0" prefWidth="117.0" style="-fx-background-color: #6496FB;" text="Valider" />
+            <Button fx:id="btn_cancel" mnemonicParsing="false" onAction="#btn_cancelClicked" prefHeight="36.0" prefWidth="117.0" text="Annuler">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
+            <Button fx:id="btn_valid" lineSpacing="28.0" mnemonicParsing="false" onAction="#btn_validClicked" prefHeight="36.0" prefWidth="117.0" style="-fx-background-color: #3726BA;" text="Valider" textFill="#43dd97">
+               <font>
+                  <Font size="14.0" />
+               </font></Button>
          </children>
          <padding>
             <Insets right="10.0" />
@@ -40,7 +46,7 @@
          <children>
             <Pane prefHeight="63.0" prefWidth="437.0">
                <children>
-                  <Label alignment="CENTER" layoutY="1.0" prefHeight="60.0" prefWidth="436.0" style="-fx-background-color: #AFC8FA;" text="Equations" textAlignment="CENTER">
+                  <Label alignment="CENTER" prefHeight="60.0" prefWidth="437.0" style="-fx-background-color: #3726BA;" text="Equations" textAlignment="CENTER" textFill="#43dd97">
                      <font>
                         <Font name="Bookman Old Style Bold" size="35.0" />
                      </font>

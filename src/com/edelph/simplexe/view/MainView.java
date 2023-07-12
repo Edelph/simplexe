@@ -6,8 +6,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
+import java.util.Objects;
 
 public class MainView extends Application {
 
@@ -21,7 +24,8 @@ public class MainView extends Application {
         MainController mainController = loader.getController();
         mainController.setSelf(mainController);
         stage.setScene(new Scene(root));
-        stage.setTitle("Algorithm Simplex");
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/edelph/simplexe/view/icon/neural-network.png"))));
+        stage.setTitle("Algorithme Simplex");
         stage.setResizable(false);
         stage.show();
     }

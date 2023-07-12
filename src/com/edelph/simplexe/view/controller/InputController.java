@@ -59,7 +59,6 @@ public class InputController implements Initializable {
     @FXML
     void closeEquationClicked(MouseEvent event) {
         parent.removeEquation(self);
-        System.out.println("clicked close");
     }
 
     public void setSelf(Map.Entry<InputController, Node> self) {

@@ -20,9 +20,9 @@
    <top>
       <VBox prefHeight="156.0" prefWidth="600.0" BorderPane.alignment="CENTER_LEFT">
          <children>
-            <Label alignment="CENTER" prefHeight="72.0" prefWidth="790.0" text="Algorithme Simplexe">
+            <Label alignment="CENTER" graphicTextGap="6.0" prefHeight="72.0" prefWidth="809.0" style="-fx-background-color: #3726BA;" text="Algorithme Simplexe" textFill="#43dd97">
                <font>
-                  <Font name="Eras Bold ITC" size="30.0" />
+                  <Font name="Eras Bold ITC" size="40.0" />
                </font>
             </Label>
             <HBox fx:id="container" alignment="CENTER_LEFT" prefHeight="84.0" prefWidth="788.0" spacing="13.0">
